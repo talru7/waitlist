@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="ChemPath — פלטפורמה ללימוד כימיה באמצעות הסברים קצרים, תרגול מודרך ורמזים מדורגים."
+  />
+  <title>ChemPath — הרשמה לגישה מוקדמת</title>
+
+  <style>
+    :root {
+      --color-primary: #283593;
+      --color-primary-light: #eef0ff;
+      --color-secondary: #2a9d8f;
+      --color-secondary-light: #e8f5f2;
+      --color-accent: #d97706;
+      --color-accent-hover: #b85f05;
+      --color-accent-soft: #fff3e2;
+      --color-background: #f8fafc;
+      --color-surface: #ffffff;
+      --color-text-primary: #172033;
+      --color-text-secondary: #667085;
+      --color-border: #e4e7ec;
+      --color-focus: #818cf8;
+      --shadow-card: 0 8px 24px rgba(23, 32, 51, 0.07);
+      --shadow-floating: 0 14px 36px rgba(23, 32, 51, 0.14);
+      --page-width: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--color-background);
+      color: var(--color-text-primary);
+      font-family: "Noto Sans Hebrew", "Heebo", Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .site-shell {
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      width: min(100% - 40px, var(--page-width));
+      margin-inline: auto;
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(248, 250, 252, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(228, 231, 236, 0.9);
+    }
+
+    .header-inner {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--color-primary);
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--color-primary);
+      color: white;
+      font-size: 0.92rem;
+      box-shadow: 0 8px 20px rgba(40, 53, 147, 0.2);
+    }
+
+    .header-link {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      padding-inline: 8px;
+      text-decoration: none;
+      color: var(--color-text-secondary);
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .header-link:hover,
+    .header-link:focus-visible {
+      color: var(--color-primary);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 54px 0 38px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto auto 0;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: rgba(42, 157, 143, 0.08);
+      filter: blur(12px);
+      transform: translate(-34%, -34%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--color-secondary-light);
+      color: #17675d;
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-secondary);
+      box-shadow: 0 0 0 5px rgba(42, 157, 143, 0.12);
+    }
+
+    h1 {
+      max-width: 720px;
+      margin: 0;
+      font-size: clamp(2.25rem, 9vw, 4.25rem);
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      font-weight: 800;
+    }
+
+    .hero-lead {
+      max-width: 640px;
+      margin: 18px 0 0;
+      color: var(--color-text-secondary);
+      font-size: clamp(1rem, 3.8vw, 1.2rem);
+      line-height: 1.7;
+    }
+
+    .value-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .value-chip {
+      padding: 8px 11px;
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--color-text-secondary);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    /* Concept mockup */
+    .concept-panel {
+      position: relative;
+      border: 1px solid var(--color-border);
+      border-radius: 26px;
+      padding: 14px;
+      background: var(--color-surface);
+      box-shadow: var(--shadow-floating);
+    }
+
+    .concept-panel::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 24px -18px -18px 24px;
+      border-radius: 26px;
+      background: var(--color-primary-light);
+    }
+
+    .concept-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 18px;
+      background: var(--color-primary-light);
+    }
+
+    .concept-overlay {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .learning-step {
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid var(--color-border);
+      background: #fbfcfe;
+    }
+
+    .learning-step.is-hint {
+      background: var(--color-secondary-light);
+      border-color: #c7e7e2;
+    }
+
+    .learning-step-label {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--color-primary);
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .learning-step p {
+      margin: 0;
+      color: var(--color-text-secondary);
+      font-size: 0.92rem;
+    }
+
+    /* Waitlist form */
+    .waitlist-section {
+      position: relative;
+      z-index: 2;
+      padding: 10px 0 56px;
+    }
+
+    .waitlist-card {
+      padding: 22px;
+      border: 1px solid var(--color-border);
+      border-radius: 24px;
+      background: var(--color-surface);
+      box-shadow: var(--shadow-card);
+    }
+
+    .waitlist-card h2 {
+      margin: 0;
+      font-size: clamp(1.5rem, 6vw, 2rem);
+      line-height: 1.25;
+    }
+
+    .waitlist-card > p {
+      margin: 8px 0 20px;
+      color: var(--color-text-secondary);
+    }
+
+    .waitlist-form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .field-group {
+      display: grid;
+      gap: 7px;
+    }
+
+    label {
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    input {
+      width: 100%;
+      min-height: 52px;
+      padding: 13px 14px;
+      border: 1px solid #d0d5dd;
+      border-radius: 14px;
+      background: var(--color-surface);
+      color: var(--color-text-primary);
+      outline: none;
+    }
+
+    input::placeholder {
+      color: #98a2b3;
+    }
+
+    input:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.24);
+    }
+
+    .submit-button {
+      min-height: 56px;
+      margin-top: 2px;
+      border: 0;
+      border-radius: 16px;
+      background: var(--color-accent);
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(217, 119, 6, 0.22);
+      transition:
+        transform 160ms ease,
+        background 160ms ease,
+        box-shadow 160ms ease;
+    }
+
+    .submit-button:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(217, 119, 6, 0.26);
+    }
+
+    .submit-button:active {
+      transform: translateY(0);
+    }
+
+    .form-note {
+      margin: 0;
+      color: var(--color-text-secondary);
+      font-size: 0.78rem;
+      text-align: center;
+    }
+
+    /* Benefits */
+    .benefits {
+      padding: 58px 0 70px;
+      background: #ffffff;
+      border-block: 1px solid var(--color-border);
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 26px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 7vw, 2.7rem);
+      line-height: 1.2;
+    }
+
+    .section-heading p {
+      margin: 10px 0 0;
+      color: var(--color-text-secondary);
+      font-size: 1rem;
+    }
+
+    .benefit-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .benefit-card {
+      min-height: 100%;
+      padding: 20px;
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      background: var(--color-surface);
+    }
+
+    .benefit-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      border-radius: 14px;
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      font-size: 1.15rem;
+      font-weight: 900;
+    }
+
+    .benefit-card:nth-child(2) .benefit-icon {
+      background: var(--color-secondary-light);
+      color: #17675d;
+    }
+
+    .benefit-card:nth-child(3) .benefit-icon {
+      background: var(--color-accent-soft);
+      color: var(--color-accent);
+    }
+
+    .benefit-card h3 {
+      margin: 0;
+      font-size: 1.15rem;
+      line-height: 1.35;
+    }
+
+    .benefit-card p {
+      margin: 8px 0 0;
+      color: var(--color-text-secondary);
+      font-size: 0.94rem;
+    }
+
+    /* Secondary CTA */
+    .closing-cta {
+      padding: 62px 0;
+    }
+
+    .closing-card {
+      padding: 28px 22px;
+      border-radius: 26px;
+      background: var(--color-primary);
+      color: white;
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(40, 53, 147, 0.2);
+    }
+
+    .closing-card h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 7vw, 2.5rem);
+      line-height: 1.25;
+    }
+
+    .closing-card p {
+      max-width: 620px;
+      margin: 10px auto 22px;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .closing-card a {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 22px;
+      border-radius: 16px;
+      background: white;
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 24px 0 30px;
+      border-top: 1px solid var(--color-border);
+      background: var(--color-surface);
+    }
+
+    .footer-inner {
+      display: grid;
+      gap: 14px;
+      text-align: center;
+    }
+
+    .copyright {
+      margin: 0;
+      color: var(--color-text-secondary);
+      font-size: 0.84rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 18px;
+    }
+
+    .footer-links a {
+      color: var(--color-text-secondary);
+      font-size: 0.84rem;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: var(--color-primary);
+      text-decoration: underline;
+    }
+
+    /* Focus */
+    :focus-visible {
+      outline: 3px solid var(--color-focus);
+      outline-offset: 3px;
+    }
+
+    /* Tablet/Desktop */
+    @media (min-width: 760px) {
+      .container {
+        width: min(100% - 64px, var(--page-width));
+      }
+
+      .hero {
+        padding: 76px 0 48px;
+      }
+
+      .hero-grid {
+        grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.95fr);
+        gap: 54px;
+      }
+
+      .waitlist-card {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 34px;
+        align-items: center;
+        padding: 30px;
+      }
+
+      .waitlist-card > div > p {
+        margin-bottom: 0;
+      }
+
+      .benefit-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        text-align: right;
+      }
+
+      .footer-links {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero {
+        padding-top: 92px;
+      }
+
+      .waitlist-section {
+        padding-bottom: 72px;
+      }
+
+      .waitlist-card {
+        padding: 34px 38px;
+      }
+
+      .benefit-card {
+        padding: 24px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="ChemPath — חזרה לראש העמוד">
+          <span class="brand-mark" aria-hidden="true">CP</span>
+          <span>ChemPath</span>
+        </a>
+
+        <a class="header-link" href="#waitlist">רשימת ההמתנה</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">
+              <span class="eyebrow-dot" aria-hidden="true"></span>
+              הבטא הראשונה נפתחת בקרוב
+            </div>
+
+            <h1 id="hero-title">נתקעת בתחילת שאלה בכימיה?</h1>
+
+            <p class="hero-lead">
+              ChemPath מלמדת איך לזהות מה מבקשים, לבחור את דרך הפתרון
+              ולהתקדם בעצמך — בעזרת הסברים קצרים, תרגול מודרך ורמזים
+              שנפתחים רק כשצריך.
+            </p>
+
+            <div class="value-strip" aria-label="יתרונות מרכזיים">
+              <span class="value-chip">פתרונות בדוקים</span>
+              <span class="value-chip">רמזים מדורגים</span>
+              <span class="value-chip">מותאם למובייל</span>
+            </div>
+          </div>
+
+          <div class="concept-panel" aria-label="הדמיית המוצר">
+            <img
+              class="concept-image"
+              src="https://picsum.photos/800/600"
+              alt="תמונת קונספט זמנית עבור פלטפורמת הלימוד ChemPath"
+            />
+
+            <div class="concept-overlay">
+              <div class="learning-step">
+                <span class="learning-step-label">מה מבקשים?</span>
+                <p>זהה את החומר המבוקש ואת היחס בינו לבין חומר המוצא.</p>
+              </div>
+
+              <div class="learning-step is-hint">
+                <span class="learning-step-label">רמז ראשון</span>
+                <p>התחל מאיזון המשוואה, לפני שאתה מציב מספרים.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="waitlist" class="waitlist-section" aria-labelledby="waitlist-title">
+        <div class="container">
+          <div class="waitlist-card">
+            <div>
+              <h2 id="waitlist-title">הצטרפו לבטא הראשונה</h2>
+              <p>
+                השאירו פרטים וקבלו עדכון כשהגישה המוקדמת תיפתח לסטודנטים
+                הראשונים.
+              </p>
+            </div>
+
+            <form class="waitlist-form" action="#" method="post" novalidate>
+              <div class="field-group">
+                <label for="full-name">שם מלא</label>
+                <input
+                  id="full-name"
+                  name="full-name"
+                  type="text"
+                  autocomplete="name"
+                  placeholder="איך קוראים לך?"
+                />
+              </div>
+
+              <div class="field-group">
+                <label for="email">כתובת דוא״ל</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  inputmode="email"
+                  autocomplete="email"
+                  placeholder="name@example.com"
+                />
+              </div>
+
+              <button class="submit-button" type="button">
+                הרשמה לגישה מוקדמת
+              </button>
+
+              <p class="form-note">
+                הכפתור מוצג לצורכי עיצוב בלבד ואינו מחובר כרגע למערכת הרשמה.
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="benefits" aria-labelledby="benefits-title">
+        <div class="container">
+          <div class="section-heading">
+            <h2 id="benefits-title">לא עוד פתרון שמדלג על ההיגיון</h2>
+            <p>
+              המוצר בנוי כדי לעזור לעבור מהבנת ההסבר ליכולת לפתור שאלה חדשה
+              באופן עצמאי.
+            </p>
+          </div>
+
+          <div class="benefit-grid">
+            <article class="benefit-card">
+              <div class="benefit-icon" aria-hidden="true">1</div>
+              <h3>לומדים איך להתחיל</h3>
+              <p>
+                מפרקים כל שאלה לנתונים, למטרה ולדרך הפעולה המתאימה לפני
+                שמתחילים לחשב.
+              </p>
+            </article>
+
+            <article class="benefit-card">
+              <div class="benefit-icon" aria-hidden="true">2</div>
+              <h3>מקבלים רמז בלי להעתיק</h3>
+              <p>
+                רמזים נפתחים בהדרגה ונותנים בדיוק את רמת העזרה שצריך כדי
+                להמשיך לבד.
+              </p>
+            </article>
+
+            <article class="benefit-card">
+              <div class="benefit-icon" aria-hidden="true">3</div>
+              <h3>מתרגלים בקצב שמתאים לך</h3>
+              <p>
+                יחידות קצרות וממוקדות שמתאימות גם לעשר דקות בין שיעורים או
+                לחזרה לקראת מבחן.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="closing-cta" aria-labelledby="closing-title">
+        <div class="container">
+          <div class="closing-card">
+            <h2 id="closing-title">רוצים להיות הראשונים לנסות?</h2>
+            <p>
+              ההרשמה לרשימת ההמתנה אינה מחייבת ותאפשר לקבל עדכון כשהבטא
+              תיפתח.
+            </p>
+            <a href="#waitlist">הצטרפות לרשימת ההמתנה</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="copyright">
+          © 2026 ChemPath. כל הזכויות שמורות.
+        </p>
+
+        <nav class="footer-links" aria-label="קישורים משפטיים">
+          <a href="#">מדיניות פרטיות</a>
+          <a href="#">תנאי שימוש</a>
+          <a href="#">נגישות</a>
+        </nav>
+      </div>
+    </footer>
+  </div>
+ <script>
+      const APPS_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+      document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+
+          // send info to Google Sheets
+          fetch(APPS_SCRIPT_URL, {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ name: name, email: email })
+          })
+          .then(() => {
+              // send conversion-event to Google Analytics
+              if (typeof gtag === 'function') {
+                  gtag('event', 'sign_up_waitlist', {
+                      'event_category': 'engagement',
+                      'event_label': 'Waitlist Form'
+                  });
+              }
+              
+              document.getElementById('statusMessage').innerText = 'תודה! נרשמת בהצלחה.';
+              document.getElementById('waitlistForm').reset();
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              document.getElementById('statusMessage').innerText = 'ארעה שגיאה, נסה שנית.';
+          });
+      });
+    </script>
+</body>
+</html>
